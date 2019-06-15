@@ -26,20 +26,19 @@ android {
     buildTypes.debug.applicationIdSuffix ".debug"
     dataBinding.enabled = true
 
-    playAccountConfigs {
+    playConfigs {
         defaultAccountConfig {
-            jsonFile = file(System.getenv("SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE") ?: 'keys.json')
+            serviceAccountCredentials = file(System.getenv("SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE") ?: 'keys.json')
         }
     }
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 4171
-        versionName "1.2.0-rc.1"
+        versionCode 4176
+        versionName "1.2.0-rc.1.4"
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-        playAccountConfig = playAccountConfigs.defaultAccountConfig
     }
 
     signingConfigs {
@@ -72,8 +71,7 @@ android {
 }
 
 play {
-    jsonFile = file(System.getenv("SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE") ?: 'keys.json')
-    uploadImages = false
+    serviceAccountCredentials = file(System.getenv("SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE") ?: 'keys.json')
     track = 'beta'
 }
 
@@ -81,10 +79,11 @@ play {
  * Some languages are not supported by Google Play, so we ignore them.
  */
 task deleteUnsupportedPlayTranslations(type: Delete) {
-    delete 'src/main/play/nn/'
-    delete 'src/main/play/el-EL/'
-    delete 'src/main/play/nb/'
-    delete 'src/main/play/en/'
-    delete 'src/main/play/ta/'
-    delete 'src/main/play/eu/'
+    delete 'src/main/play/listings/el-EL/'
+    delete 'src/main/play/listings/en/'
+    delete 'src/main/play/listings/eu/'
+    delete 'src/main/play/listings/nb/'
+    delete 'src/main/play/listings/nl_BE/'
+    delete 'src/main/play/listings/nn/'
+    delete 'src/main/play/listings/ta/'
 }
